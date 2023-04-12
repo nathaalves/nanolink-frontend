@@ -1,11 +1,11 @@
-import { Inter } from 'next/font/google';
-
-const inter = Inter({ subsets: ['latin'] });
+import { Header } from '@/templates/Header';
+import { Main } from '@/templates/Main';
 
 export default function Home() {
   return (
-    <h1 className={'text-3xl font-bold underline ' + inter.className}>
-      Olá, mundo!
-    </h1>
+    <div className="flex flex-col h-screen overflow-x-hidden">
+      <Header />
+      <Main />
+    </div>
   );
 }
