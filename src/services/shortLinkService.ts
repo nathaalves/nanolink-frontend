@@ -1,5 +1,5 @@
 const get = async (originalURL: string) => {
-  const response = await fetch('http://localhost:5000/short-link/create', {
+  const response = await fetch('https://nnlk.nl/create', {
     method: 'POST',
     body: JSON.stringify({
       url: originalURL,
