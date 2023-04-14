@@ -1,15 +1,22 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    './app/**/*.{js,ts,jsx,tsx}', // Note the addition of the `app` directory.
-    './pages/**/*.{js,ts,jsx,tsx}',
-    './components/**/*.{js,ts,jsx,tsx}',
-
-    // Or if using `src` directory:
-    './src/**/*.{js,ts,jsx,tsx}',
-  ],
+  content: ['./src/**/*.{js,ts,jsx,tsx}'],
   theme: {
-    extend: {},
+    extend: {
+      animation: {
+        'load-spinner': 'spinner 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite',
+      },
+      keyframes: {
+        spinner: {
+          '0%': {
+            height: '0%',
+          },
+          '50%, 100%': {
+            height: '100%',
+          },
+        },
+      },
+    },
   },
-  plugins: [],
+  plugins: [require('tailwindcss-animation-delay')],
 };
