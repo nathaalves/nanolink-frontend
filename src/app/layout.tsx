@@ -1,4 +1,5 @@
 import './globals.css';
+import { quicksand } from '@/assets/fonts/quicksand';
 
 export const metadata = {
   title: 'Nano Link',
