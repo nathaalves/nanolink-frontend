@@ -1,3 +1,5 @@
+import QueryProvider from '@/providers/QueryProvider';
+
 import './globals.css';
 import { quicksand } from '@/assets/fonts/quicksand';
 
@@ -12,7 +14,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-br">
-      <body>{children}</body>
+      <body className={quicksand.className}>
+        <QueryProvider>{children}</QueryProvider>
+      </body>
     </html>
   );
 }
