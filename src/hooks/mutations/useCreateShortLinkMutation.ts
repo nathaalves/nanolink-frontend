@@ -32,7 +32,7 @@ export function useCreateShortLinkMutation(
     {
       mutationFn: () =>
         request.post('/create', {
-          originalURL,
+          originalURL: originalURL.trim(),
         }),
       onSuccess: () => {
         setOriginalURL('');
