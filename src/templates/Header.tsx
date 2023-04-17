@@ -9,7 +9,9 @@ export function Header() {
       <ResponsiveContainer className="flex items-center justify-between p-4">
         <Link href="https://nanolink.app.br">
           <h1
-            className={'text-4xl md:text-5x text-sky-600 ' + sriracha.className}
+            className={
+              'text-4xl md:text-5xl text-sky-600 ' + sriracha.className
+            }
           >
             Nano Link
           </h1>
