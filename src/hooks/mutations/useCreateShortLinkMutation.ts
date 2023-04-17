@@ -4,7 +4,7 @@ import { AxiosResponse, AxiosError } from 'axios';
 
 type ResponseDataType = {
   shortLink: string;
-  url: string;
+  originalURL: string;
 };
 
 type ServerErrorType = {
@@ -17,7 +17,10 @@ type ServerErrorType = {
   }[];
 };
 
-export function useCreateShortLinkMutation(originalURL: string) {
+export function useCreateShortLinkMutation(
+  originalURL: string,
+  setOriginalURL: (value: string) => void
+) {
   const {
     data: response,
     mutate,
@@ -29,8 +32,11 @@ export function useCreateShortLinkMutation(originalURL: string) {
     {
       mutationFn: () =>
         request.post('/create', {
-          url: originalURL,
+          originalURL,
         }),
+      onSuccess: () => {
+        setOriginalURL('');
+      },
     }
   );
 
