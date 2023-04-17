@@ -19,25 +19,29 @@ export function LinkHandler() {
 
   return (
     <>
-      <Input
-        placeholder="URL original"
-        value={originalURL}
-        onChange={(event) => setOriginalURL(event.target.value)}
-      />
-      {isError && (
-        <div>
-          {errorData?.details.map((detail, index) => (
-            <ErrorMessage key={index}>{detail.message}</ErrorMessage>
-          ))}
-        </div>
-      )}
-      <Button
-        disabled={isLoading || !originalURL}
-        isLoading={isLoading}
-        onClick={() => mutate()}
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          mutate();
+        }}
+        className="flex flex-col gap-4"
       >
-        Criar URL
-      </Button>
+        <Input
+          placeholder="URL original"
+          value={originalURL}
+          onChange={(e) => setOriginalURL(e.target.value)}
+        />
+        {isError && (
+          <div>
+            {errorData?.details.map((detail, index) => (
+              <ErrorMessage key={index}>{detail.message}</ErrorMessage>
+            ))}
+          </div>
+        )}
+        <Button disabled={isLoading || !originalURL} isLoading={isLoading}>
+          Criar URL
+        </Button>
+      </form>
       {isSuccess && (
         <>
           <hr className="border-red-500" />
