@@ -1,6 +1,7 @@
 'use client';
 
 import { Button } from '@/components/Button';
+import { ErrorMessage } from '@/components/ErrorMessage';
 import { Form } from '@/components/Form';
 import { Input } from '@/components/Input';
 import { useSignupMutation } from '@/hooks/mutations/useSignupMutation';
@@ -64,6 +65,17 @@ export default function Signup() {
         onChange={handleInputChange}
         disabled={isLoading}
       />
+      {isError && (
+        <div>
+          {errorData?.details ? (
+            errorData?.details.map((detail, index) => (
+              <ErrorMessage key={index}>{detail.message}</ErrorMessage>
+            ))
+          ) : (
+            <ErrorMessage>{errorData?.message}</ErrorMessage>
+          )}
+        </div>
+      )}
       <Button aria-label="Regigstrar usuário" isLoading={isLoading}>
         Registrar
       </Button>
