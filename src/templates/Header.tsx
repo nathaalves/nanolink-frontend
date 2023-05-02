@@ -1,23 +1,44 @@
+'use client';
+
 import { ResponsiveContainer } from '@/components/ResponsiveContainer';
-import { SandwichButton } from '@/components/SandwichButton';
-import { sriracha } from '@/assets/fonts/sriracha';
-import Link from 'next/link';
+import { HamburgerButton } from '@/components/HamburgerButton';
+import { Anchor } from '@/components/Anchor';
+import { useState } from 'react';
+import { Logo } from '@/components/Logo';
 
 export function Header() {
+  const [isNavOpen, setIsNavOpen] = useState(false);
+
   return (
-    <header className="flex items-center justify-center h-24">
-      <ResponsiveContainer className="flex items-center justify-between p-4">
-        <Link href="https://nanolink.app.br">
-          <h1
-            className={
-              'text-4xl md:text-5xl text-sky-600 ' + sriracha.className
-            }
+    <>
+      <header className="flex items-center justify-center h-24">
+        <ResponsiveContainer className="flex items-center justify-between p-4">
+          <Logo />
+          <HamburgerButton
+            className="md:hidden"
+            onClick={() => setIsNavOpen(!isNavOpen)}
+          />
+          <nav
+            className={`bg-white/90 absolute top-24 bottom-0 left-0 right-0 mb-20 md:block md:relative md:inset-auto md:mb-0
+            ${isNavOpen ? 'block' : 'hidden'}
+          `}
           >
-            Nano Link
-          </h1>
-        </Link>
-        <SandwichButton />
-      </ResponsiveContainer>
-    </header>
+            <ResponsiveContainer className="flex flex-col h-full gap-3 p-4 md:p-0">
+              <div className="flex flex-col md:flex-row-reverse gap-3 mt-auto">
+                <Anchor href="/entrada" className="text-white bg-sky-600">
+                  Entrar
+                </Anchor>
+                <Anchor
+                  href="/registro"
+                  className="text-white bg-sky-600 md:bg-white md:text-sky-600"
+                >
+                  Registrar-se
+                </Anchor>
+              </div>
+            </ResponsiveContainer>
+          </nav>
+        </ResponsiveContainer>
+      </header>
+    </>
   );
 }
