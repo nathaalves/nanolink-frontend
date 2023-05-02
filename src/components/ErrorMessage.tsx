@@ -1,7 +1,7 @@
 import { MdError } from 'react-icons/md';
 
 type ErroMessagePropsType = {
-  children: string;
+  children: React.ReactNode;
 };
 
 export function ErrorMessage({ children }: ErroMessagePropsType) {

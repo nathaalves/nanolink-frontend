@@ -9,20 +9,14 @@ export function Button({
   children,
   disabled,
   isLoading,
+  className,
   ...rest
 }: ButtonProps) {
   return (
     <button
-      className={`
-        flex items-center
-        justify-center
-        h-12
-        rounded
-        bg-sky-600
-        text-white
-        font-bold 
-        px-4 py-2
+      className={`flex items-center justify-center h-12 rounded bg-sky-600 text-white font-bold px-4 py-2
         ${disabled ? 'opacity-50 ' : 'hover:opacity-75 '}
+        ${className}
      `}
       disabled={disabled || isLoading}
       {...rest}
