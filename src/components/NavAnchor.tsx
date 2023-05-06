@@ -47,14 +47,14 @@ export function NavAnchor({ path, label }: NavAnchorPropsType) {
         <span
           className={`
           flex items-center h-full px-4 whitespace-nowrap rounded-full relative translate-x-0
-          group-[.closed]/nav:hidden
-          group-[.closed]/nav:group-hover:flex
-          group-[.closed]/nav:text-white
-          group-[.closed]/nav:absolute
-          group-[.closed]/nav:translate-x-full
-          group-[.closed]/nav:right-4
-          group-[.closed]/nav:z-10
-          group-[.closed]/nav:bg-sky-800
+          group-[.minimized]/nav:hidden
+          group-[.minimized]/nav:group-hover:flex
+          group-[.minimized]/nav:text-white
+          group-[.minimized]/nav:absolute
+          group-[.minimized]/nav:translate-x-full
+          group-[.minimized]/nav:right-4
+          group-[.minimized]/nav:z-10
+          group-[.minimized]/nav:bg-sky-800
         `}
         >
           {label}
@@ -62,9 +62,8 @@ export function NavAnchor({ path, label }: NavAnchorPropsType) {
         {activePath === path && (
           <span
             className={`
-            w-2 h-full rounded-l-lg absolute right-0 bg-sky-800
+            w-2 h-full rounded-r-lg absolute left-0 bg-sky-800
             group-hover:flex
-            group-[.closed]/nav:group-hover:hidden
           `}
           ></span>
         )}
