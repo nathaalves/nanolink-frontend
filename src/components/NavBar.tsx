@@ -6,31 +6,15 @@ import { MdArrowBackIosNew, MdArrowForwardIos } from 'react-icons/md';
 type NavBarPropsType = {
   children: React.ReactNode;
   closed?: boolean;
-  enableMinimization?: boolean;
 };
 
-export function NavBar({
-  children,
-  closed = false,
-  enableMinimization = false,
-}: NavBarPropsType) {
+export function NavBar({ children, closed = false }: NavBarPropsType) {
   const [isClosed, setIsClosed] = React.useState(closed);
 
-  const iconStyle = 'text-2xl text-sky-800';
+  const iconStyle = 'text-xs text-white absolute top-1/2 -translate-y-1/2';
 
   const handleToggle = () => {
     setIsClosed(!isClosed);
-  };
-
-  const handleNavBarState = () => {
-    if (isClosed) {
-      if (enableMinimization) {
-        return 'max-w-min minimized';
-      }
-      return 'hidden';
-    } else {
-      return 'w-60';
-    }
   };
 
   return (
@@ -44,9 +28,18 @@ export function NavBar({
         <ul className="flex flex-1 flex-col gap-2">{children}</ul>
       </nav>
       <button
-        className="flex items-center justify-center w-4 h-16 rounded-r-xl bg-white absolute top-1/2 -translate-y-1/2 right-0 translate-x-full"
+        className="absolute top-1/2 -translate-y-1/2 right-0 translate-x-full"
         onClick={handleToggle}
       >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 16 96"
+          width="16"
+          height="96"
+          className="fill-sky-800 -translate-x-[2.5px]"
+        >
+          <path d="M0 0h3c0 20 12 12 12 32v32c0 20-12 12-12 32H0z"></path>
+        </svg>
         {isClosed ? (
           <MdArrowForwardIos className={iconStyle} />
         ) : (
