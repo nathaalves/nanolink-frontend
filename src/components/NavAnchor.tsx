@@ -2,32 +2,15 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { BiLinkAlt } from 'react-icons/bi';
+import { IconType } from 'react-icons';
 
 type NavAnchorPropsType = {
   path: string;
   label: string;
+  Icon: IconType;
 };
 
-type IconPropsType = {
-  label: string;
-  className: string;
-};
-
-const Icon = ({ label, className }: IconPropsType) => {
-  const selectedIcon = () => {
-    switch (label) {
-      case 'Links':
-        return <BiLinkAlt />;
-      default:
-        return null;
-    }
-  };
-
-  return <span className={className}>{selectedIcon()}</span>;
-};
-
-export function NavAnchor({ path, label }: NavAnchorPropsType) {
+export function NavAnchor({ path, label, Icon }: NavAnchorPropsType) {
   const activePath = usePathname();
 
   return (
@@ -43,7 +26,7 @@ export function NavAnchor({ path, label }: NavAnchorPropsType) {
           }
         `}
       >
-        <Icon label={label} className="text-3xl" />
+        <Icon className="text-3xl" />
         <span
           className={`
           flex items-center h-full px-4 whitespace-nowrap rounded-full relative translate-x-0
