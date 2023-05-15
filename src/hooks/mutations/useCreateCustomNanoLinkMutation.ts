@@ -41,5 +41,7 @@ export function useCreateCustomNanoLinkMutation(
     },
   });
 
-  return { mutate, isLoading, error, isError };
+  const errorData = error?.response?.data;
+
+  return { mutate, isLoading, errorData, isError };
 }
