@@ -32,7 +32,7 @@ type ImageCropPropsType = {
   id?: string;
   name?: string;
   label?: string;
-  setDataUrl: React.Dispatch<React.SetStateAction<string | undefined>>;
+  setDataUrl: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
 export function ImageCrop({ setDataUrl }: ImageCropPropsType) {
@@ -121,7 +121,7 @@ export function ImageCrop({ setDataUrl }: ImageCropPropsType) {
               className="p-2"
               onClick={() => {
                 setImgSrc('');
-                setDataUrl('');
+                setDataUrl(null);
               }}
             >
               <MdClose className="text-3xl text-white absolute -top-10 right-0" />
