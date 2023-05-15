@@ -42,14 +42,6 @@ export function NavAnchor({ path, label, Icon }: NavAnchorPropsType) {
         >
           {label}
         </span>
-        {activePath === path && (
-          <span
-            className={`
-            w-2 h-full rounded-r-lg absolute left-0 bg-sky-800
-            group-hover:flex
-          `}
-          ></span>
-        )}
       </Link>
     </li>
   );
