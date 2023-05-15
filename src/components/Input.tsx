@@ -46,7 +46,7 @@ export function Input({
   };
 
   return (
-    <div className={`flex flex-col gap-1`} onClick={handleClick}>
+    <div className={`flex flex-col gap-1 w-full`} onClick={handleClick}>
       {labelVisible && (
         <label htmlFor={rest.id} className="text-slate-700">
           {label}
@@ -62,7 +62,7 @@ export function Input({
         <input
           aria-label={label}
           className={
-            'flex-1 h-max outline-none truncate disabled:bg-gray-100 disabled:text-zinc-400'
+            'flex-1 h-max outline-none truncate disabled:bg-gray-100 disabled:text-zinc-400 w-full'
           }
           type={type === 'password' ? (isVisible ? 'text' : 'password') : type}
           ref={inputRef}
