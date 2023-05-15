@@ -31,6 +31,7 @@ export function useGetNanoLinksQuery() {
     queryKey: ['nanolinks'],
     queryFn: () => request.get('/nanolinks'),
     staleTime: Infinity,
+    retry: 0,
   });
 
   const responseData = data?.data;
