@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 
 type CreateCustomNanoLinkMutationData = {
   originalURL: string;
+  image: string | null;
   title: string;
   nanoId: string;
 };
