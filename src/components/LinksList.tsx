@@ -6,6 +6,7 @@ import Image from 'next/image';
 import linkImage from '@/assets/images/nanolink-192x192.png';
 import { useGetNanoLinksQuery } from '@/hooks/queries/useGetNanoLinksQuery';
 import { LoadSpinner } from './LoadSpinner';
+import { isoDateToLocalDate } from '@/utils/isoDateToLocalDate';
 
 const BASE_URL = new URL(process.env.NEXT_PUBLIC_API_BASE_URL as string).host;
 
@@ -29,15 +30,18 @@ export function LinksList() {
                 <Image
                   src={nanoLink.image ? nanoLink.image : linkImage}
                   alt={nanoLink.title}
-                  width={54}
-                  height={54}
+                  width={0}
+                  height={0}
+                  className="w-14 h-14"
                 />
                 <div className="flex flex-col justify-evenly w-full ml-4">
                   <span className="font-medium truncate">{nanoLink.title}</span>
                   <p className="text-sm text-sky-600 font-bold truncate">
                     {BASE_URL}/{nanoLink.nanoId}
                   </p>
-                  <p className="text-xs text-zinc-600">{'05/05/2023'}</p>
+                  <p className="text-xs text-zinc-600">
+                    {isoDateToLocalDate(nanoLink.updatedAt)}
+                  </p>
                 </div>
               </Link>
             </li>
