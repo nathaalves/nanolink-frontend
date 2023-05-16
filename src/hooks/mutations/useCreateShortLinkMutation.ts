@@ -31,7 +31,7 @@ export function useCreateShortLinkMutation(
   } = useMutation<AxiosResponse<ResponseDataType>, AxiosError<ServerErrorType>>(
     {
       mutationFn: () =>
-        request.post('/create', {
+        request.post('/nanolink/create', {
           originalURL: originalURL.trim(),
         }),
       onSuccess: () => {
