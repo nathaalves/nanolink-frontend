@@ -1,5 +1,10 @@
-import { sriracha } from '@/assets/fonts/sriracha';
 import Link from 'next/link';
+import { Sriracha } from 'next/font/google';
+
+const sriracha = Sriracha({
+  subsets: ['latin'],
+  weight: '400',
+});
 
 export function Logo() {
   return (

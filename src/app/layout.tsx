@@ -1,11 +1,15 @@
 import QueryProvider from '@/providers/QueryProvider';
+import { Quicksand } from 'next/font/google';
 
 import './globals.css';
-import { quicksand } from '@/assets/fonts/quicksand';
 
 export const metadata = {
   title: 'Nano Link',
 };
+
+const quicksand = Quicksand({
+  subsets: ['latin'],
+});
 
 export default function RootLayout({
   children,
