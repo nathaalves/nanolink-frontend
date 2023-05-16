@@ -26,3 +26,19 @@
 .hamburger[aria-expanded='true'] .bottom {
   rotate: -45deg;
 }
+
+::-webkit-scrollbar {
+  @apply w-1;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-white;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-sky-700;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-sky-800;
+}
