@@ -19,7 +19,7 @@ export function Header() {
             onClick={() => setIsNavOpen(!isNavOpen)}
           />
           <nav
-            className={`bg-white/90 absolute top-24 bottom-0 left-0 right-0 mb-20 md:block md:relative md:inset-auto md:mb-0
+            className={`bg-white/80 backdrop-blur-sm absolute top-24 -bottom-20 left-0 right-0 mb-20 md:block md:relative md:inset-auto md:mb-0 z-10
             ${isNavOpen ? 'block' : 'hidden'}
           `}
           >

@@ -37,11 +37,13 @@ export function Auth({ children }: AuthPropsType) {
             src={robotFindingData}
             alt="Robot finding data"
             className="w-96 hidden md:block xl:hidden"
+            priority
           />
           <Image
             src={robotsDoingDataResearch}
             alt="Robot doing data research"
             className="w-[90%] max-w-4xl hidden xl:block absolute bottom-20 left-36"
+            priority
           />
         </div>
       </div>

@@ -96,23 +96,25 @@ export function ImageCrop({ setDataUrl }: ImageCropPropsType) {
         onChange={onSelectFile}
       />
       {!!imgSrc && (
-        <div className="flex items-center justify-center p-8 bg-black/25 absolute top-0 bottom-0 left-0 right-0 z-10">
-          <div className="bg-white p-4 rounded-lg max-w-max relative">
-            <ReactCrop
-              crop={crop}
-              onChange={(_, percentCrop) => setCrop(percentCrop)}
-              onComplete={(c) => onCropComplete(c)}
-              aspect={1}
-            >
-              <img
-                alt="Crop me"
-                src={imgSrc}
-                onLoad={onImageLoad}
-                ref={imgRef}
-              />
-            </ReactCrop>
+        <div className="flex items-center justify-center p-8 bg-black/40 backdrop-blur-sm absolute top-0 bottom-0 left-0 right-0 z-10">
+          <div className="relative">
+            <div className="bg-white h-fit p-4 rounded-lg">
+              <ReactCrop
+                crop={crop}
+                onChange={(_, percentCrop) => setCrop(percentCrop)}
+                onComplete={(c) => onCropComplete(c)}
+                aspect={1}
+              >
+                <img
+                  alt="Crop me"
+                  src={imgSrc}
+                  onLoad={onImageLoad}
+                  ref={imgRef}
+                />
+              </ReactCrop>
+            </div>
             <Button
-              className="h-8 p-2 whitespace-nowrap absolute -bottom-12 right-1/2 translate-x-1/2"
+              className="h-8 p-2 whitespace-nowrap absolute -bottom-6 right-1/2 translate-x-1/2"
               onClick={() => setImgSrc('')}
             >
               Cortar imagem
