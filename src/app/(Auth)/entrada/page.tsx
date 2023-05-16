@@ -24,6 +24,8 @@ export default function Login() {
         id="login-email"
         name="email"
         label="E-mail:"
+        type="email"
+        icon="email"
         placeholder="Informe seu email"
         value={form.email}
         onChange={handleInputChange}
@@ -33,6 +35,8 @@ export default function Login() {
         id="lolgin-password"
         name="password"
         label="Senha:"
+        type="password"
+        icon="password"
         placeholder="Informe sua senha"
         value={form.password}
         onChange={handleInputChange}
