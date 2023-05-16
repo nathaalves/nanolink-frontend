@@ -39,7 +39,7 @@ export function useSigninMutation(signinBody: SigninBodyType) {
         'userData',
         JSON.stringify({ name: res?.data.name, email: res?.data.email })
       );
-      router.push('/painel');
+      router.push('/nanolinks');
     },
   });
 
