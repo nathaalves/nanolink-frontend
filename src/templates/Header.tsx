@@ -25,7 +25,7 @@ export function Header() {
           >
             <ResponsiveContainer className="flex flex-col h-full gap-3 p-4 md:p-0">
               <div className="flex flex-col md:flex-row-reverse gap-3 mt-auto">
-                <Anchor href="/entrada" className="text-white bg-sky-600">
+                <Anchor href="/nanolinks" className="text-white bg-sky-600">
                   Entrar
                 </Anchor>
                 <Anchor
