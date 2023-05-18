@@ -27,6 +27,7 @@ type SigninBodyType = {
 
 export function useSigninMutation(signinBody: SigninBodyType) {
   const router = useRouter();
+  const queryClient = useQueryClient();
 
   const { mutate, isLoading, error, isError } = useMutation<
     UserDataType,
@@ -50,11 +51,8 @@ export function useSigninMutation(signinBody: SigninBodyType) {
       }
     },
     onSuccess: (res) => {
-      request.defaults.headers.Authorization = `Bearer ${res?.data.accessToken}`;
-      localStorage.setItem(
-        'userData',
-        JSON.stringify({ name: res?.data.name, email: res?.data.email })
-      );
+      request.defaults.headers.Authorization = `Bearer ${res.accessToken}`;
+      queryClient.setQueryData(['userData'], res);
       router.push('/nanolinks');
     },
   });
