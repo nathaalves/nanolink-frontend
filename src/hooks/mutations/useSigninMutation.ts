@@ -1,9 +1,10 @@
 import { request } from '@/config/request';
-import { useMutation } from '@tanstack/react-query';
-import { AxiosResponse, AxiosError } from 'axios';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
+import { useUnauthorizedInterceptor } from '../interceptors/useUnauthorizedInterceptor';
 
-type ResponseDataType = {
+type UserDataType = {
   name: string;
   email: string;
   accessToken: string;
@@ -27,22 +28,37 @@ type SigninBodyType = {
 
 export function useSigninMutation(signinBody: SigninBodyType) {
   const router = useRouter();
+  const queryClient = useQueryClient();
+  const { addUnauthorizedInterceptor } = useUnauthorizedInterceptor();
 
   const { mutate, isLoading, error, isError } = useMutation<
-    AxiosResponse<ResponseDataType>,
-    AxiosError<ServerErrorType>
+    UserDataType,
+    ServerErrorType
   >({
-    mutationFn: () => request.post('/auth/signin', signinBody),
+    mutationFn: async () => {
+      try {
+        const response = await request.post<UserDataType>(
+          '/auth/signin',
+          signinBody,
+          {
+            withCredentials: true,
+          }
+        );
+        return response.data;
+      } catch (error) {
+        if (error instanceof AxiosError) {
+          return Promise.reject(error.response?.data);
+        }
+        return Promise.reject(error);
+      }
+    },
     onSuccess: (res) => {
-      request.defaults.headers.Authorization = `Bearer ${res?.data.accessToken}`;
-      localStorage.setItem(
-        'userData',
-        JSON.stringify({ name: res?.data.name, email: res?.data.email })
-      );
+      request.defaults.headers.Authorization = `Bearer ${res.accessToken}`;
+      queryClient.setQueryData(['userData'], res);
+      addUnauthorizedInterceptor();
       router.push('/nanolinks');
     },
   });
 
-  const errorData = error?.response?.data;
-  return { mutate, isLoading, errorData, isError };
+  return { mutate, isLoading, error, isError };
 }
