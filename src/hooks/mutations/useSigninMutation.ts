@@ -1,9 +1,9 @@
 import { request } from '@/config/request';
-import { useMutation } from '@tanstack/react-query';
-import { AxiosResponse, AxiosError } from 'axios';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
 
-type ResponseDataType = {
+type UserDataType = {
   name: string;
   email: string;
   accessToken: string;
@@ -29,10 +29,26 @@ export function useSigninMutation(signinBody: SigninBodyType) {
   const router = useRouter();
 
   const { mutate, isLoading, error, isError } = useMutation<
-    AxiosResponse<ResponseDataType>,
-    AxiosError<ServerErrorType>
+    UserDataType,
+    ServerErrorType
   >({
-    mutationFn: () => request.post('/auth/signin', signinBody),
+    mutationFn: async () => {
+      try {
+        const response = await request.post<UserDataType>(
+          '/auth/signin',
+          signinBody,
+          {
+            withCredentials: true,
+          }
+        );
+        return response.data;
+      } catch (error) {
+        if (error instanceof AxiosError) {
+          return Promise.reject(error.response?.data);
+        }
+        return Promise.reject(error);
+      }
+    },
     onSuccess: (res) => {
       request.defaults.headers.Authorization = `Bearer ${res?.data.accessToken}`;
       localStorage.setItem(
@@ -43,6 +59,5 @@ export function useSigninMutation(signinBody: SigninBodyType) {
     },
   });
 
-  const errorData = error?.response?.data;
-  return { mutate, isLoading, errorData, isError };
+  return { mutate, isLoading, error, isError };
 }
