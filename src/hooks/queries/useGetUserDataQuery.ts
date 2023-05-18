@@ -2,6 +2,7 @@ import { request } from '@/config/request';
 import { useQuery } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
+import { useUnauthorizedInterceptor } from '../interceptors/useUnauthorizedInterceptor';
 
 type UserDataType = {
   name: string;
@@ -15,6 +16,7 @@ type ServerErrorType = {
 };
 
 export function useGetUserDataQuery(initialData?: UserDataType) {
+  const { addUnauthorizedInterceptor } = useUnauthorizedInterceptor();
   const router = useRouter();
 
   const { data, isSuccess } = useQuery<UserDataType, ServerErrorType>(
@@ -35,7 +37,7 @@ export function useGetUserDataQuery(initialData?: UserDataType) {
     {
       onSuccess: (res) => {
         request.defaults.headers.Authorization = `Bearer ${res.accessToken}`;
-        router.push('/nanolinks');
+        addUnauthorizedInterceptor();
       },
       onError: () => {
         router.push('/entrada');

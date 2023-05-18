@@ -2,6 +2,7 @@ import { request } from '@/config/request';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
+import { useUnauthorizedInterceptor } from '../interceptors/useUnauthorizedInterceptor';
 
 type UserDataType = {
   name: string;
@@ -28,6 +29,7 @@ type SigninBodyType = {
 export function useSigninMutation(signinBody: SigninBodyType) {
   const router = useRouter();
   const queryClient = useQueryClient();
+  const { addUnauthorizedInterceptor } = useUnauthorizedInterceptor();
 
   const { mutate, isLoading, error, isError } = useMutation<
     UserDataType,
@@ -53,6 +55,7 @@ export function useSigninMutation(signinBody: SigninBodyType) {
     onSuccess: (res) => {
       request.defaults.headers.Authorization = `Bearer ${res.accessToken}`;
       queryClient.setQueryData(['userData'], res);
+      addUnauthorizedInterceptor();
       router.push('/nanolinks');
     },
   });
