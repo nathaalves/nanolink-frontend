@@ -1,3 +1,4 @@
+import { UserDataProvider } from '@/providers/UserDataProvider';
 import { Dashboard } from '@/templates/Dashboard';
 
 export const metadata = {
@@ -9,5 +10,9 @@ export default function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <Dashboard>{children}</Dashboard>;
+  return (
+    <UserDataProvider>
+      <Dashboard>{children}</Dashboard>
+    </UserDataProvider>
+  );
 }
