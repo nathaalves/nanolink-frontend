@@ -13,7 +13,7 @@ export default function Login() {
     password: '',
   });
 
-  const { mutate, isLoading, isError, errorData } = useSigninMutation(form);
+  const { mutate, isLoading, isError, error } = useSigninMutation(form);
 
   return (
     <Form
@@ -44,12 +44,12 @@ export default function Login() {
       />
       {isError && (
         <div>
-          {errorData?.details ? (
-            errorData?.details.map((detail, index) => (
+          {error?.details ? (
+            error?.details.map((detail, index) => (
               <ErrorMessage key={index}>{detail.message}</ErrorMessage>
             ))
           ) : (
-            <ErrorMessage>{errorData?.message}</ErrorMessage>
+            <ErrorMessage>{error?.message}</ErrorMessage>
           )}
         </div>
       )}
