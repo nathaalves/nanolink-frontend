@@ -26,7 +26,7 @@ export function NavAnchor({ path, label, Icon }: NavAnchorPropsType) {
           }
         `}
       >
-        <Icon className="text-3xl" />
+        <Icon className="text-4xl" />
         <span
           className={`
           flex items-center h-full px-4 whitespace-nowrap rounded-full relative translate-x-0
