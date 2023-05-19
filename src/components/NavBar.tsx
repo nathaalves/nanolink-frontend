@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { MdArrowBackIosNew, MdArrowForwardIos } from 'react-icons/md';
+import { UserProfile } from './UserProfile';
 
 type NavBarPropsType = {
   children: React.ReactNode;
@@ -19,22 +20,23 @@ export function NavBar({ children, closed = false }: NavBarPropsType) {
 
   return (
     <div
-      className={`h-full absolute z-10 bg-black/40 backdrop-blur-lg md:w-fit md:relative
+      className={`flex h-full absolute z-10 md:w-fit md:relative
       ${isClosed ? 'w-fit' : 'w-full'}
       `}
-      onClick={handleToggle}
     >
-      <div className="relative h-full w-fit bg-white">
+      <div className="flex flex-col h-full w-fit shadow-[5px_0px_14px_1px_rgba(0,0,0,0.1)] bg-white relative">
+        <UserProfile isClosed={isClosed} />
+        <hr className="border-slate-200" />
         <nav
           className={`
-            h-full pt-4 shadow-[5px_0px_14px_1px_rgba(0,0,0,0.1)] group/nav
+            flex-1 pt-4 group/nav
             ${isClosed ? 'hidden md:flex md:max-w-min minimized' : 'w-60'}
         `}
         >
           <ul className="flex flex-1 flex-col gap-2">{children}</ul>
         </nav>
         <button
-          className="absolute top-1/2 -translate-y-1/2 right-0 translate-x-full overflow-hidden pr-2"
+          className="absolute z-10 top-1/2 -translate-y-1/2 right-0 translate-x-full overflow-hidden pr-2"
           onClick={handleToggle}
         >
           <svg
@@ -55,6 +57,12 @@ export function NavBar({ children, closed = false }: NavBarPropsType) {
           <span className="h-1/2 bg-black absolute left-0 bottom-1/2 translate-y-1/2 shadow-[0px_0px_20px_4px_rgba(0,0,0,0.7)] -z-10"></span>
         </button>
       </div>
+      <div
+        className={` 
+          flex-1 bg-black/40 backdrop-blur-lg
+        `}
+        onClick={handleToggle}
+      ></div>
     </div>
   );
 }

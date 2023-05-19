@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import { request } from '@/config/request';
 import { AxiosError, AxiosResponse } from 'axios';
+import { useAuthorizedRequest } from '../useAuthorizedRequest';
 
 type Link = {
   id: string;
@@ -24,12 +24,13 @@ type ServerErrorType = {
 };
 
 export function useGetNanoLinksQuery() {
+  const authorizedRequest = useAuthorizedRequest();
   const { data, isLoading, error, isError } = useQuery<
     AxiosResponse<Link[]>,
     AxiosError<ServerErrorType>
   >({
     queryKey: ['nanolinks'],
-    queryFn: () => request.get('/nanolinks'),
+    queryFn: () => authorizedRequest.get('/nanolinks'),
     staleTime: Infinity,
     retry: 0,
   });
