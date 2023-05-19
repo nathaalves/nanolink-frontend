@@ -1,9 +1,9 @@
 'use client';
 
-import { request } from '@/config/request';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AxiosResponse, AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
+import { useAuthorizedRequest } from '../useAuthorizedRequest';
 
 type CreateCustomNanoLinkMutationData = {
   originalURL: string;
@@ -26,13 +26,14 @@ export function useCreateCustomNanoLinkMutation(
   data: CreateCustomNanoLinkMutationData
 ) {
   const router = useRouter();
+  const authorizedRequest = useAuthorizedRequest();
   const queryClient = useQueryClient();
 
   const { mutate, isLoading, error, isError } = useMutation<
     AxiosResponse,
     AxiosError<ServerErrorType>
   >({
-    mutationFn: () => request.post('/nanolink/create-custom', data),
+    mutationFn: () => authorizedRequest.post('/nanolink/create-custom', data),
     onSuccess: () => {
       queryClient.invalidateQueries(['nanolinks']);
       router.push('/nanolinks');
