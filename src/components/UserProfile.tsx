@@ -17,8 +17,6 @@ export function UserProfile({ isClosed }: UserProfileProps) {
   const userData = queryClient.getQueryData<UserData>(['userData']);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  console.log(userData);
-
   return (
     <div className="relative group/profile">
       <button
