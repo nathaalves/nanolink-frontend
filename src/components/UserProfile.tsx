@@ -18,10 +18,10 @@ export function UserProfile({ isClosed }: UserProfileProps) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   return (
-    <div className="relative group/profile">
+    <div className="flex flex-col relative group/profile">
       <button
         className={`
-          items-center h-14 pl-2 gap-4 mx-auto mt-10
+          items-center h-14 gap-4 pr-6 ml-6 mt-10
           ${isClosed ? 'hidden md:flex' : 'flex'}
         `}
         onClick={() => setIsDropdownOpen(!isDropdownOpen)}
@@ -30,18 +30,18 @@ export function UserProfile({ isClosed }: UserProfileProps) {
           {userData?.name[0].toUpperCase()}
         </div>
         <div
-          className={`w-[88px]
+          className={`w-[108px]
         ${isClosed ? 'hidden' : 'block'}
       `}
         >
-          <p className="truncate">{userData?.name + ' asadasdasdasd'}</p>
-          <p className="text-xs truncate">{userData?.email}</p>
+          <p className="text-left truncate">{userData?.name}</p>
+          <p className="text-xs text-left truncate">{userData?.email}</p>
         </div>
         <div className={`${isClosed ? 'hidden' : 'flex'}`}>
           {isDropdownOpen ? <MdArrowDropUp /> : <MdArrowDropDown />}
         </div>
       </button>
-      {isDropdownOpen && <UserDropDownMenu />}
+      {isDropdownOpen && <UserDropDownMenu isClosed={false} />}
     </div>
   );
 }

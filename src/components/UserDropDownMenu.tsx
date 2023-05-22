@@ -1,17 +1,23 @@
 import { useSignoutMutation } from '@/hooks/mutations/useSignoutMutation';
 import { MdOutlineExitToApp } from 'react-icons/md';
+import { Nav } from './Nav';
+import { NavItem } from './NavItem';
 
-export function UserDropDownMenu() {
+type UserDropDownMenuPropsType = {
+  isClosed: boolean;
+};
+
+export function UserDropDownMenu({ isClosed }: UserDropDownMenuPropsType) {
   const { mutate } = useSignoutMutation();
 
   return (
-    <div className=" mb-4">
-      <button
-        className="flex gap-4 items-center w-full px-8 py-2 text-red-500 text-left hover:bg-slate-100"
+    <Nav isClosed={isClosed}>
+      <NavItem
+        label="Sair"
+        Icon={MdOutlineExitToApp}
+        role="button"
         onClick={() => mutate()}
-      >
-        <MdOutlineExitToApp /> Sair
-      </button>
-    </div>
+      />
+    </Nav>
   );
 }
