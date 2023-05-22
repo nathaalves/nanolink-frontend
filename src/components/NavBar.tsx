@@ -1,15 +1,21 @@
 'use client';
 
 import React from 'react';
-import { MdArrowBackIosNew, MdArrowForwardIos } from 'react-icons/md';
+import {
+  MdArrowBackIosNew,
+  MdArrowForwardIos,
+  MdQueryStats,
+} from 'react-icons/md';
 import { UserProfile } from './UserProfile';
+import { Nav } from './Nav';
+import { NavItem } from './NavItem';
+import { BiLinkAlt } from 'react-icons/bi';
 
 type NavBarPropsType = {
-  children: React.ReactNode;
   closed?: boolean;
 };
 
-export function NavBar({ children, closed = false }: NavBarPropsType) {
+export function NavBar({ closed = false }: NavBarPropsType) {
   const [isClosed, setIsClosed] = React.useState(closed);
 
   const iconStyle = 'text-xs text-sky-800 absolute top-1/2 -translate-y-1/2';
@@ -26,15 +32,15 @@ export function NavBar({ children, closed = false }: NavBarPropsType) {
     >
       <div className="flex flex-col h-full w-fit shadow-[5px_0px_14px_1px_rgba(0,0,0,0.1)] bg-white relative">
         <UserProfile isClosed={isClosed} />
-        <hr className="border-slate-200" />
-        <nav
-          className={`
-            flex-1 pt-4 group/nav
-            ${isClosed ? 'hidden md:flex md:max-w-min minimized' : 'w-60'}
-        `}
-        >
-          <ul className="flex flex-1 flex-col gap-2">{children}</ul>
-        </nav>
+        <hr className="border-slate-200 my-4" />
+        <Nav isClosed={isClosed}>
+          <NavItem
+            path="/estatisticas"
+            label="Estatísticas"
+            Icon={MdQueryStats}
+          />
+          <NavItem path="/nanolinks" label="Nano Links" Icon={BiLinkAlt} />
+        </Nav>
         <button
           className="absolute z-10 top-1/2 -translate-y-1/2 right-0 translate-x-full overflow-hidden pr-2"
           onClick={handleToggle}
