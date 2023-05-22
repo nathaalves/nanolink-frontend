@@ -41,7 +41,7 @@ export function UserProfile({ isClosed }: UserProfileProps) {
           {isDropdownOpen ? <MdArrowDropUp /> : <MdArrowDropDown />}
         </div>
       </button>
-      {isDropdownOpen && <UserDropDownMenu isClosed={false} />}
+      {isDropdownOpen && <UserDropDownMenu isClosed={isClosed} />}
     </div>
   );
 }
